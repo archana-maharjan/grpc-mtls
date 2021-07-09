@@ -8,20 +8,23 @@ export const grpcClientOptions: ClientOptions = {
   options: {
     package: 'hero',
     protoPath: join(__dirname, './hero/hero.proto'),
-    // credentials: credentials.createSsl()
-    credentials: ServerCredentials.createSsl(
-        fs.readFileSync(join(process.cwd(), 'certificates', 'server-cert.pem')),
-        [
-          {
-            private_key: fs.readFileSync(
-              join(process.cwd(), 'certificates', 'server-key.pem'),
-            ),
-            cert_chain: fs.readFileSync(
-              join(process.cwd(), 'certificates', 'ca-cert.pem'),
-            ),
-          },
-        ],
-        true,
-      )
+    credentials: credentials.createSsl(
+      fs.readFileSync(join(process.cwd(), "certificates", "ca-cert.pem")), 
+      fs.readFileSync(join(process.cwd(), "certificates", "server-key.pem")), 
+      fs.readFileSync(join(process.cwd(), "certificates", "server-cert.pem")))
+    // credentials: ServerCredentials.createSsl(
+    //     fs.readFileSync(join(process.cwd(), 'certificates', 'ca-cert.pem')),
+    //     [
+    //       {
+    //         private_key: fs.readFileSync(
+    //           join(process.cwd(), 'certificates', 'server-key.pem'),
+    //         ),
+    //         cert_chain: fs.readFileSync(
+    //           join(process.cwd(), 'certificates', 'server-cert.pem'),
+    //         ),
+    //       },
+    //     ],
+    //     true,
+    //   )
   },
 };
